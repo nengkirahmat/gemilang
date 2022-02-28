@@ -47,6 +47,10 @@ dependencies:
   api_cache_manager: ^1.0.1
   sleek_circular_slider: ^2.0.1
   connectivity_plus: ^2.2.1
+  carousel_slider: ^4.0.0
+  # money_formatter: ^0.0.3
+  sqflite: ^2.0.2
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:

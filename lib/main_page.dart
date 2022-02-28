@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lgp/login_page.dart';
-import 'package:lgp/my_session.dart';
-import 'package:lgp/produk_page.dart';
+import 'package:lgp/bookmark/bookmark.dart';
+import 'package:lgp/login/login_page.dart';
+import 'package:lgp/login/my_session.dart';
+import 'package:lgp/produk/produk_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -25,21 +26,27 @@ class _MainPageState extends State<MainPage>
     print('Is Login : ' + isLoggedIn.toString());
   }
 
-  int _selectedNavbar = 0;
+  final int _selectedNavbar = 0;
   void _changeSelectedNavBar(int index) {
     setState(() {
       // print(index);
       if (index == 0) {
         Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context) {
-            return MainPage();
+            return const MainPage();
           },
         ));
       } else if (index == 1) {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const Bookmark();
+          },
+        ));
+      } else if (index == 2) {
         MySession.instance.removeAll();
         Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context) {
-            return LoginPage();
+            return const LoginPage();
           },
         ));
       }
@@ -50,10 +57,10 @@ class _MainPageState extends State<MainPage>
   int _selectedIndex = 0;
 
   List<Widget> list = [
-    Tab(
+    const Tab(
       text: 'Gudang',
     ),
-    Tab(
+    const Tab(
       text: 'Cabang',
     ),
   ];
@@ -73,13 +80,14 @@ class _MainPageState extends State<MainPage>
     setState(() {});
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       // drawer: NavDrawer(),
       appBar: AppBar(
         centerTitle: true,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -96,8 +104,7 @@ class _MainPageState extends State<MainPage>
           controller: _controller,
           tabs: list,
         ),
-        title: Container(
-            child: Row(
+        title: Row(
           children: <Widget>[
             Image.asset(
               'images/icon.png',
@@ -105,17 +112,17 @@ class _MainPageState extends State<MainPage>
               width: 60,
             ),
             Text(
-              "PT. LIVINA GEMILANG PLASTINDO",
+              "Gemilang",
               style: GoogleFonts.oswald(fontSize: 18),
             ),
           ],
-        )),
+        ),
       ),
 
       body: Center(
         child: TabBarView(controller: _controller, children: [
-          ProdukPage(jenis: 'gudang'),
-          ProdukPage(jenis: 'cabang'),
+          const ProdukPage(jenis: 'gudang'),
+          const ProdukPage(jenis: 'cabang'),
         ]),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -125,12 +132,16 @@ class _MainPageState extends State<MainPage>
             label: "Home",
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark),
+            label: "Bookmark",
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.logout),
             label: "Logout",
           ),
         ],
         currentIndex: _selectedNavbar,
-        selectedItemColor: Color.fromARGB(255, 47, 60, 240),
+        selectedItemColor: const Color.fromARGB(255, 47, 60, 240),
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         onTap: _changeSelectedNavBar,
@@ -140,15 +151,17 @@ class _MainPageState extends State<MainPage>
 }
 
 class NavDrawer extends StatelessWidget {
+  const NavDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
+          const DrawerHeader(
             child: Text(
-              "PT. LIVINA GEMILANG PLASTINDO",
+              "Gemilang",
               style: TextStyle(color: Colors.black, fontSize: 25),
             ),
             // decoration: BoxDecoration(
@@ -158,23 +171,23 @@ class NavDrawer extends StatelessWidget {
             //         image: AssetImage('assets/logo.png'))),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
             onTap: () => {
               Navigator.pushReplacement(context, MaterialPageRoute(
                 builder: (context) {
-                  return MainPage();
+                  return const MainPage();
                 },
               ))
             },
           ),
           ListTile(
-            leading: Icon(Icons.account_tree),
-            title: Text('Cabang'),
+            leading: const Icon(Icons.account_tree),
+            title: const Text('Cabang'),
             onTap: () => {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return ProdukPage(
+                  return const ProdukPage(
                     jenis: 'cabang',
                   );
                 },
@@ -182,12 +195,12 @@ class NavDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.apartment),
-            title: Text('Gudang'),
+            leading: const Icon(Icons.apartment),
+            title: const Text('Gudang'),
             onTap: () => {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return ProdukPage(
+                  return const ProdukPage(
                     jenis: 'gudang',
                   );
                 },
@@ -206,12 +219,12 @@ class NavDrawer extends StatelessWidget {
           //   },
           // ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text('Logout'),
             onTap: () async {
               MySession.instance.removeAll();
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => LoginPage()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (_) => const LoginPage()));
             },
           ),
         ],

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:lgp/login_page.dart';
-import 'package:lgp/main_page.dart';
-import 'package:lgp/my_session.dart';
-import 'package:lgp/splashscreen.dart';
+import 'package:lgp/login/my_session.dart';
+import 'package:lgp/login/splashscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,6 +33,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {});
   }
 
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -44,9 +43,9 @@ class _MyAppState extends State<MyApp> {
         }
       },
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+        // debugShowCheckedModeBanner: false,
         // theme: ThemeData(fontFamily: GoogleFonts.openSans().fontFamily),
-        home: SplashScreen(),
+        home: const SplashScreen(),
         builder: EasyLoading.init(),
       ),
     );

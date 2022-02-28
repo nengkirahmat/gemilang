@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lgp/main_page.dart';
-import 'package:lgp/my_session.dart';
+import 'package:lgp/login/my_session.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
@@ -57,11 +58,11 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                       controller: username,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: "Masukkan Username",
                           prefixIcon: Icon(Icons.people)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextFormField(
@@ -72,11 +73,11 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       controller: password,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: "Masukkan Password",
                           prefixIcon: Icon(Icons.lock)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     SizedBox(
@@ -86,11 +87,11 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextButton.styleFrom(
                               primary: Colors.white,
                               backgroundColor:
-                                  Color.fromARGB(255, 47, 60, 240)),
+                                  const Color.fromARGB(255, 47, 60, 240)),
                           onPressed: () {
                             this._dologin();
                           },
-                          child: Text(
+                          child: const Text(
                             "Login",
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold),
@@ -116,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => MainPage(),
+            builder: (context) => const MainPage(),
           ));
       // Alert(
       //   context: context,
@@ -139,11 +140,11 @@ class _LoginPageState extends State<LoginPage> {
       Alert(
         context: context,
         title: "Gagal",
-        content: Text("Username dan Password Tidak Valid."),
+        content: const Text("Username dan Password Tidak Valid."),
         type: AlertType.error,
         buttons: [
           DialogButton(
-            child: Text(
+            child: const Text(
               "OK",
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:api_cache_manager/utils/cache_manager.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -35,38 +34,38 @@ class ApiDataProduk {
     if (json['stok'] != null) {
       stok = <Stok>[];
       json['stok'].forEach((v) {
-        stok!.add(new Stok.fromJson(v));
+        stok!.add(Stok.fromJson(v));
       });
     }
     if (json['satuan'] != null) {
       satuan = <Satuan>[];
       json['satuan'].forEach((v) {
-        satuan!.add(new Satuan.fromJson(v));
+        satuan!.add(Satuan.fromJson(v));
       });
     }
     if (json['modal'] != null) {
       modal = <Modal>[];
-      (json['modal'] as List).forEach((v) {
-        modal!.add(new Modal.fromJson(v));
-      });
+      for (var v in (json['modal'] as List)) {
+        modal!.add(Modal.fromJson(v));
+      }
     }
     // gambar = json['gambar'];
     // tanggalUpdate = json['tanggal_update'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['nama'] = this.nama;
-    data['harga_modal'] = this.hargaModal;
-    if (this.stok != null) {
-      data['stok'] = this.stok!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['nama'] = nama;
+    data['harga_modal'] = hargaModal;
+    if (stok != null) {
+      data['stok'] = stok!.map((v) => v.toJson()).toList();
     }
-    if (this.satuan != null) {
-      data['satuan'] = this.satuan!.map((v) => v.toJson()).toList();
+    if (satuan != null) {
+      data['satuan'] = satuan!.map((v) => v.toJson()).toList();
     }
-    if (this.modal != null) {
-      data['modal'] = this.modal!.map((v) => v.toJson()).toList();
+    if (modal != null) {
+      data['modal'] = modal!.map((v) => v.toJson()).toList();
     }
     // data['gambar'] = this.gambar;
     // data['tanggal_update'] = this.tanggalUpdate;
@@ -86,9 +85,9 @@ class Stok {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['stok'] = this.stok;
-    data['satuan'] = this.satuan;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['stok'] = stok;
+    data['satuan'] = satuan;
     return data;
   }
 
@@ -107,9 +106,9 @@ class Satuan {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['konversi'] = this.konversi;
-    data['satuan'] = this.satuan;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['konversi'] = konversi;
+    data['satuan'] = satuan;
     return data;
   }
 }
@@ -126,9 +125,9 @@ class Modal {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['konversi'] = this.konversi;
-    data['satuan'] = this.satuan;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['konversi'] = konversi;
+    data['satuan'] = satuan;
     return data;
   }
 }
@@ -145,6 +144,7 @@ Future<List<ApiDataProduk>> fetchDataProduk(idJenis, produk) async {
           Uri.parse('https://sim.saktiputra.com/api/produk/get'),
           body: body);
       if (response.statusCode == 200) {
+        EasyLoading.dismiss();
         APICacheDBModel cacheDBModel =
             APICacheDBModel(key: idJenis + produk, syncData: response.body);
         await APICacheManager().addCacheData(cacheDBModel);
@@ -152,15 +152,15 @@ Future<List<ApiDataProduk>> fetchDataProduk(idJenis, produk) async {
         var parsed = json.decode(response.body);
         // print(parsed);
         List jsonResponse = parsed as List;
-        print('wifi');
-        EasyLoading.dismiss();
+        // print('wifi');
         return jsonResponse
             .map((data) => ApiDataProduk.fromJson(data))
             .toList();
       } else {
         EasyLoading.dismiss();
 
-        throw Exception('Gagal Mengambil Data Baru');
+        return List.empty();
+        // throw Exception('Gagal Mengambil Data Baru');
       }
     } else {
       EasyLoading.dismiss();
@@ -175,6 +175,7 @@ Future<List<ApiDataProduk>> fetchDataProduk(idJenis, produk) async {
           Uri.parse('https://sim.saktiputra.com/api/produk/get'),
           body: body);
       if (response.statusCode == 200) {
+        EasyLoading.dismiss();
         APICacheDBModel cacheDBModel =
             APICacheDBModel(key: idJenis + produk, syncData: response.body);
         await APICacheManager().addCacheData(cacheDBModel);
@@ -182,14 +183,15 @@ Future<List<ApiDataProduk>> fetchDataProduk(idJenis, produk) async {
         var parsed = json.decode(response.body);
         // print(parsed);
         List jsonResponse = parsed as List;
-        print('mobile');
+        // print('mobile');
         return jsonResponse
             .map((data) => ApiDataProduk.fromJson(data))
             .toList();
       } else {
         EasyLoading.dismiss();
 
-        throw Exception('Gagal Mengambil Data Baru');
+        return List.empty();
+        // throw Exception('Gagal Mengambil Data Baru');
       }
     } else {
       EasyLoading.dismiss();
@@ -203,11 +205,12 @@ Future<List<ApiDataProduk>> fetchDataProduk(idJenis, produk) async {
       var parsed =
           jsonDecode(cacheData.syncData); //lalu kita decode hasil datanya
       List jsonResponse = parsed as List;
-      print('cache');
+      // print('cache');
       return jsonResponse.map((data) => ApiDataProduk.fromJson(data)).toList();
     } else {
       EasyLoading.dismiss();
-      throw Exception('Gagal Mengambil Data');
+      return List.empty();
+      // throw Exception('Gagal Mengambil Data');
     }
   }
 }

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:lgp/login_page.dart';
+import 'package:lgp/login/login_page.dart';
 import 'package:lgp/main_page.dart';
-import 'package:lgp/my_session.dart';
+import 'package:lgp/login/my_session.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   initScreen(BuildContext context) {
     return Scaffold(
       body: Container(
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         // decoration: BoxDecoration(
         //     image: DecorationImage(
         //         alignment: Alignment.topCenter,
@@ -42,8 +42,8 @@ class _SplashScreenState extends State<SplashScreen> {
             //         color: Color.fromARGB(255, 33, 31, 31)),
             //   ),
             // ),
-            Padding(padding: EdgeInsets.only(top: 20)),
-            SizedBox(
+            const Padding(padding: EdgeInsets.only(top: 20)),
+            const SizedBox(
               height: 20,
             ),
             SleekCircularSlider(
@@ -53,23 +53,23 @@ class _SplashScreenState extends State<SplashScreen> {
               appearance: CircularSliderAppearance(
                   infoProperties: InfoProperties(
                       mainLabelStyle:
-                          TextStyle(color: Colors.grey, fontSize: 15)),
+                          const TextStyle(color: Colors.grey, fontSize: 15)),
                   customColors: CustomSliderColors(
                       dotColor: Colors.white,
-                      progressBarColor: Color.fromARGB(255, 32, 2, 143),
+                      progressBarColor: const Color.fromARGB(255, 32, 2, 143),
                       shadowColor: Colors.white,
                       trackColor: Colors.white),
-                  spinnerDuration: 5,
-                  animDurationMultiplier: 5,
+                  spinnerDuration: 7,
+                  animDurationMultiplier: 7,
                   animationEnabled: true,
                   startAngle: 0,
                   angleRange: 360),
             ),
-            Text(
+            const Text(
               'Initializing App...',
               style: TextStyle(color: Colors.grey, fontSize: 20),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ],
@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTimer() async {
-    var duration = Duration(seconds: 5);
+    var duration = const Duration(seconds: 5);
     return Timer(duration, route);
   }
 
@@ -93,10 +93,12 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => (isLoggedIn) ? MainPage() : LoginPage(),
+          builder: (context) =>
+              (isLoggedIn) ? const MainPage() : const LoginPage(),
         ));
   }
 
+  @override
   Widget build(BuildContext context) {
     return initScreen(context);
   }
