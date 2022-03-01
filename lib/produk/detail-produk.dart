@@ -120,112 +120,96 @@ class _DetailProdukState extends State<DetailProduk>
 
                   // print('data is ' + data.toString());
                   return (data!.isNotEmpty)
-                      ? SingleChildScrollView(
-                          controller: controller,
-                          scrollDirection: Axis.vertical,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Column(
-                                      children: [
-                                        (data.first.gambar!.li!.isNotEmpty)
-                                            ? CarouselSlider(
-                                                options: CarouselOptions(
-                                                    autoPlay: true),
-                                                items: data.first.gambar!.li!
-                                                    .map((item) => Container(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              229,
-                                                              236,
-                                                              248),
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child:
-                                                              CachedNetworkImage(
-                                                            repeat: ImageRepeat
-                                                                .noRepeat,
-                                                            fit: BoxFit.fill,
-                                                            placeholder: (context,
-                                                                    url) =>
-                                                                const CircularProgressIndicator(),
-                                                            imageUrl: item
-                                                                .gambar
-                                                                .toString(),
-                                                          ),
-                                                        ))
-                                                    .toList(),
-                                              )
-                                            : Container(
-                                                color: Color.fromARGB(
-                                                    255, 229, 236, 248),
-                                                alignment: Alignment.center,
-                                                child: CachedNetworkImage(
-                                                  repeat: ImageRepeat.noRepeat,
-                                                  fit: BoxFit.fill,
-                                                  placeholder: (context, url) =>
-                                                      const CircularProgressIndicator(),
-                                                  imageUrl: data
-                                                      .first.gambar!.def
-                                                      .toString(),
-                                                ),
-                                              ),
-                                        Container(
-                                          margin: const EdgeInsets.fromLTRB(
-                                              5, 5, 5, 0),
-                                          child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                  data.first.cabang.toString(),
-                                                  style: GoogleFonts.oswald(
-                                                      fontSize: 14))),
-                                        ),
-                                        Container(
-                                          margin: const EdgeInsets.fromLTRB(
-                                              5, 0, 5, 5),
-                                          child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                data.first.nama.toString(),
-                                                style: GoogleFonts.oswald(
-                                                    fontSize: 20),
-                                              )),
-                                        ),
-                                        Container(
-                                          color:
-                                              Color.fromARGB(255, 62, 82, 199),
-                                          child: TabBar(
-                                            onTap: (index) {
-                                              // Should not used it as it only called when tab options are clicked,
-                                              // not when user swapped
-                                            },
-                                            controller: _controller,
-                                            tabs: list,
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                children: [
+                                  (data.first.gambar!.li!.isNotEmpty)
+                                      ? CarouselSlider(
+                                          options:
+                                              CarouselOptions(autoPlay: true),
+                                          items: data.first.gambar!.li!
+                                              .map((item) => Container(
+                                                    color: Color.fromARGB(
+                                                        255, 229, 236, 248),
+                                                    alignment: Alignment.center,
+                                                    child: CachedNetworkImage(
+                                                      repeat:
+                                                          ImageRepeat.noRepeat,
+                                                      fit: BoxFit.fill,
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          const CircularProgressIndicator(),
+                                                      imageUrl: item.gambar
+                                                          .toString(),
+                                                    ),
+                                                  ))
+                                              .toList(),
+                                        )
+                                      : Container(
+                                          color: Color.fromARGB(
+                                              255, 229, 236, 248),
+                                          alignment: Alignment.center,
+                                          child: CachedNetworkImage(
+                                            repeat: ImageRepeat.noRepeat,
+                                            fit: BoxFit.fill,
+                                            placeholder: (context, url) =>
+                                                const CircularProgressIndicator(),
+                                            imageUrl: data.first.gambar!.def
+                                                .toString(),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Container(
-                                          height: MediaQuery.of(context)
-                                              .size
-                                              .height,
-                                          child: TabBarView(
-                                              controller: _controller,
-                                              children: [
-                                                listDetailProduk(data, context),
-                                                listRiwayatModal(data, context),
-                                              ]),
-                                        ),
-                                      ],
+                                  Container(
+                                    margin:
+                                        const EdgeInsets.fromLTRB(5, 5, 5, 0),
+                                    child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                            data.first.cabang.toString(),
+                                            style: GoogleFonts.oswald(
+                                                fontSize: 14))),
+                                  ),
+                                  Container(
+                                    margin:
+                                        const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                                    child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          data.first.nama.toString(),
+                                          style:
+                                              GoogleFonts.oswald(fontSize: 20),
+                                        )),
+                                  ),
+                                  Container(
+                                    color: Color.fromARGB(255, 62, 82, 199),
+                                    child: TabBar(
+                                      onTap: (index) {
+                                        // Should not used it as it only called when tab options are clicked,
+                                        // not when user swapped
+                                      },
+                                      controller: _controller,
+                                      tabs: list,
                                     ),
-                                  )),
-                            ],
-                          ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height,
+                                    child: TabBarView(
+                                        controller: _controller,
+                                        children: [
+                                          listDetailProduk(data, context),
+                                          listRiwayatModal(data, context),
+                                        ]),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         )
                       : const Center(
                           child: Text('Tidak ada data'),
@@ -286,252 +270,258 @@ class _DetailProdukState extends State<DetailProduk>
     );
   }
 
-  Column listDetailProduk(List<ApiDetailProduk> data, BuildContext context) {
-    return Column(
-      children: data
-          .map((produk) => Column(
-                children: <Widget>[
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                    child: Row(
+  listDetailProduk(List<ApiDetailProduk> data, BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: data
+            .map((produk) => Column(
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 6,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Text('Stock',
+                                    style: GoogleFonts.oswald(
+                                        fontWeight: FontWeight.bold))),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 5,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Text('Satuan',
+                                    style: GoogleFonts.oswald(
+                                        fontWeight: FontWeight.bold))),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 5,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Text('Perhitungan',
+                                    style: GoogleFonts.oswald(
+                                        fontWeight: FontWeight.bold))),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Text('Modal',
+                                    style: GoogleFonts.oswald(
+                                        fontWeight: FontWeight.bold))),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 1,
+                      color: Colors.black26,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: <Widget>[
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 6,
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: Text('Stock',
-                                  style: GoogleFonts.oswald(
-                                      fontWeight: FontWeight.bold))),
+                          child: Column(
+                            children: produk.stok!
+                                .map((e) => Align(
+                                      alignment: Alignment.center,
+                                      child: Text(e.stok.toString()),
+                                    ))
+                                .toList(),
+                          ),
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 5,
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: Text('Satuan',
-                                  style: GoogleFonts.oswald(
-                                      fontWeight: FontWeight.bold))),
+                          child: Column(
+                            children: produk.modal!
+                                .map((e) => Align(
+                                      alignment: Alignment.center,
+                                      child: Text(e.satuan.toString()),
+                                    ))
+                                .toList(),
+                          ),
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 5,
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: Text('Perhitungan',
-                                  style: GoogleFonts.oswald(
-                                      fontWeight: FontWeight.bold))),
+                          child: Column(
+                            children: produk.satuan!
+                                .map((e) => Align(
+                                      alignment: Alignment.center,
+                                      child: Text(e.konversi.toString()),
+                                    ))
+                                .toList(),
+                          ),
                         ),
-                        SizedBox(
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                           width: MediaQuery.of(context).size.width / 3,
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: Text('Modal',
-                                  style: GoogleFonts.oswald(
-                                      fontWeight: FontWeight.bold))),
+                          child: Column(
+                            children: produk.modal!
+                                .map((e) => Align(
+                                      alignment: Alignment.centerRight,
+                                      child:
+                                          Text('Rp. ' + e.konversi.toString()),
+                                    ))
+                                .toList(),
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    height: 1,
-                    color: Colors.black26,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 6,
-                        child: Column(
-                          children: produk.stok!
-                              .map((e) => Align(
-                                    alignment: Alignment.center,
-                                    child: Text(e.stok.toString()),
-                                  ))
-                              .toList(),
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 5,
-                        child: Column(
-                          children: produk.modal!
-                              .map((e) => Align(
-                                    alignment: Alignment.center,
-                                    child: Text(e.satuan.toString()),
-                                  ))
-                              .toList(),
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 5,
-                        child: Column(
-                          children: produk.satuan!
-                              .map((e) => Align(
-                                    alignment: Alignment.center,
-                                    child: Text(e.konversi.toString()),
-                                  ))
-                              .toList(),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                        width: MediaQuery.of(context).size.width / 3,
-                        child: Column(
-                          children: produk.modal!
-                              .map((e) => Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Text('Rp. ' + e.konversi.toString()),
-                                  ))
-                              .toList(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
-              ))
-          .toList(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
+                ))
+            .toList(),
+      ),
     );
   }
 
-  Column listRiwayatModal(List<ApiDetailProduk> data, BuildContext context) {
-    return Column(
-      children: data
-          .map((produk) => Column(
-                children: <Widget>[
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: Text('Tanggal',
+  listRiwayatModal(List<ApiDetailProduk> data, BuildContext context) {
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Column(
+        children: data
+            .map((produk) => Column(
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text('Tanggal',
+                                      style: GoogleFonts.oswald(
+                                          fontWeight: FontWeight.bold)))),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text('Modal Lama',
+                                      style: GoogleFonts.oswald(
+                                          fontWeight: FontWeight.bold)))),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Modal Baru',
                                     style: GoogleFonts.oswald(
-                                        fontWeight: FontWeight.bold)))),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: Text('Modal Lama',
-                                    style: GoogleFonts.oswald(
-                                        fontWeight: FontWeight.bold)))),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Modal Baru',
-                                  style: GoogleFonts.oswald(
-                                      fontWeight: FontWeight.bold),
-                                ))),
-                      ],
+                                        fontWeight: FontWeight.bold),
+                                  ))),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    height: 1,
-                    color: Colors.black26,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Column(
-                    children: [
-                      SingleChildScrollView(
-                        controller: controller,
-                        scrollDirection: Axis.vertical,
-                        child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: data.first.riwayatModal!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              List<RiwayatModal>? riwayat =
-                                  data.first.riwayatModal;
-                              return Container(
-                                margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Container(
-                                    child: Row(
-                                      children: <Widget>[
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              3,
-                                          child: Container(
-                                            margin:
-                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                            child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(riwayat![index]
-                                                  .update
-                                                  .toString()),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 1,
+                      color: Colors.black26,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Column(
+                      children: [
+                        SingleChildScrollView(
+                          controller: controller,
+                          scrollDirection: Axis.vertical,
+                          child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: data.first.riwayatModal!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                List<RiwayatModal>? riwayat =
+                                    data.first.riwayatModal;
+                                return Container(
+                                  margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Container(
+                                      child: Row(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3,
+                                            child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  5, 0, 5, 0),
+                                              child: Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Text(riwayat![index]
+                                                    .update
+                                                    .toString()),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              3,
-                                          child: Container(
-                                            margin:
-                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                            child: Align(
-                                              alignment: Alignment.topRight,
-                                              child: Text('Rp. ' +
-                                                  riwayat[index]
-                                                      .modalLama
-                                                      .toString()),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3,
+                                            child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  5, 0, 5, 0),
+                                              child: Align(
+                                                alignment: Alignment.topRight,
+                                                child: Text('Rp. ' +
+                                                    riwayat[index]
+                                                        .modalLama
+                                                        .toString()),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              3,
-                                          child: Container(
-                                            margin:
-                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                            child: Align(
-                                              alignment: Alignment.topRight,
-                                              child: Text('Rp. ' +
-                                                  riwayat[index]
-                                                      .modalBaru
-                                                      .toString()),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3,
+                                            child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  5, 0, 5, 0),
+                                              child: Align(
+                                                alignment: Alignment.topRight,
+                                                child: Text('Rp. ' +
+                                                    riwayat[index]
+                                                        .modalBaru
+                                                        .toString()),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            }),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
-              ))
-          .toList(),
+                                );
+                              }),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
+                ))
+            .toList(),
+      ),
     );
   }
 }
