@@ -50,10 +50,7 @@ class _DetailProdukState extends State<DetailProduk>
   }
 
   _bookmarkPage() {
-    String url = 'https://sim.saktiputra.com/api/produk/detail/' +
-        widget.id +
-        '/' +
-        widget.jenis;
+    String url = '';
     String cacheId = 'produk' + widget.jenis + widget.id;
     addItem(widget.judul, cacheId, url);
   }
