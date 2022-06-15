@@ -141,7 +141,7 @@ Future<List<ApiDataProduk>> fetchDataProduk(idJenis, produk) async {
     if (produk != '') {
       body = {'cabang': idJenis, 'produk': produk};
       final response = await http.post(
-          Uri.parse('https://sim.saktiputra.com/api/produk/get'),
+          Uri.parse(''),
           body: body);
       if (response.statusCode == 200) {
         EasyLoading.dismiss();
@@ -172,7 +172,7 @@ Future<List<ApiDataProduk>> fetchDataProduk(idJenis, produk) async {
     if (produk != '') {
       body = {'cabang': idJenis, 'produk': produk};
       final response = await http.post(
-          Uri.parse('https://sim.saktiputra.com/api/produk/get'),
+          Uri.parse(''),
           body: body);
       if (response.statusCode == 200) {
         EasyLoading.dismiss();
