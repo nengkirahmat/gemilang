@@ -39,7 +39,7 @@ class _ProdukPageState extends State<ProdukPage> {
     EasyLoading.show(status: "Tunggu Sebentar...");
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile) {
-      String _baseUrl = "https://sim.saktiputra.com/api/produk/" + jenis;
+      String _baseUrl = "";
       final response = await http
           .get(Uri.parse(_baseUrl)); //untuk melakukan request ke webservice
       if (response.statusCode == 200) {
@@ -60,7 +60,7 @@ class _ProdukPageState extends State<ProdukPage> {
 
       print('mobile');
     } else if (connectivityResult == ConnectivityResult.wifi) {
-      String _baseUrl = "https://sim.saktiputra.com/api/produk/" + jenis;
+      String _baseUrl = "";
       final response = await http
           .get(Uri.parse(_baseUrl)); //untuk melakukan request ke webservice
       if (response.statusCode == 200) {
