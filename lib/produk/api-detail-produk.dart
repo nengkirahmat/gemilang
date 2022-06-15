@@ -79,7 +79,7 @@ Future<void> addItem(String judul, String cache, String url) async {
 Future<List<ApiDetailProduk>> fetchDetailProduk(jenis, id, judul) async {
   EasyLoading.show(status: "Tunggu Sebentar...");
   String url =
-      'https://sim.saktiputra.com/api/produk/detail/' + id + '/' + jenis;
+      '';
   try {
     // var connectivityResult = await (Connectivity().checkConnectivity());
     // if (connectivityResult == ConnectivityResult.wifi) {
